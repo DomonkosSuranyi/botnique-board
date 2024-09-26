@@ -41,3 +41,20 @@ To try the game alone you might want to run two or more clients on the same comp
 The server identifies a player by its name and its address.  
 To be able to connect multiple clients those has to be started
 with a different player name.
+
+## gameplay
+### controls
+The player turns always towards the cursor. You can move with WASD keys relatively to facing direction.  
+W - move forward  
+S - move backward  
+A - move left  
+D - move right  
+Left click - shoot  
+1 - switch weapon to Revolver  
+2 - switch weapon to Shotgun  
+3 - switch weapon to Rifle  
+R - reload  
+
+### misc
+The weapons have different parameters. They differ in damage, pellet number, spread, shoot distance, bullet speed.  
+The player is respawned in a few seconds after death.
