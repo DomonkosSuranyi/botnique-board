@@ -97,9 +97,14 @@ impl Weapon {
         self.details.bullet_distance_limit / self.details.bullet_speed
     }
 
-    pub fn is_allowed_to_reload(&self) -> bool {
-        self.reload_started_at.is_none()
+    pub fn is_magazine_full(&self) -> bool {
+        self.bullets_left_in_magazine == self.details.magazine_size
     }
+
+    pub fn is_allowed_to_reload(&self) -> bool {
+        self.reload_started_at.is_none() && !self.is_magazine_full()
+    }
+
 }
 
 mod weapon_details {
