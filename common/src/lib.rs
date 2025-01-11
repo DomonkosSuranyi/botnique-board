@@ -19,6 +19,7 @@ pub mod utilities;
 pub enum MoveDirection {
     Forward,
     Backward,
+    RunForward,
     StrafeLeft,
     StrafeRight,
 }

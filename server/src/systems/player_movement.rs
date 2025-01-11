@@ -16,7 +16,11 @@ pub fn apply_input(mut query: Query<(&GlobalTransform, &mut Transform, &mut Velo
 fn move_directions_from_input(input: &Input) -> Vec<MoveDirection> {
     let mut directions = Vec::new();
     if input.flags.intersects(InputFlags::FORWARD) {
-        directions.push(MoveDirection::Forward);
+        if input.flags.intersects(InputFlags::RUN) {
+            directions.push(MoveDirection::RunForward);
+        } else {
+            directions.push(MoveDirection::Forward);
+        }
     }
     if input.flags.intersects(InputFlags::BACKWARD) {
         directions.push(MoveDirection::Backward);
@@ -67,6 +71,10 @@ fn as_vector2(move_dir: MoveDirection) -> MeterPerSecVec2 {
             x: -PLAYER_MAX_WALK_SPEED / 2.0,
             y: MeterPerSec(0.0),
         },
+        MoveDirection::RunForward => MeterPerSecVec2 {
+            x: MeterPerSec(0.0),
+            y: PLAYER_MAX_WALK_SPEED * - 2.0,
+        },
     }
 }
 
@@ -111,6 +119,10 @@ mod test {
             fwd_down: FACING_DOWN, vec!{Forward}, (MeterPerSec(0.0), -PLAYER_MAX_WALK_SPEED),
             fwd_left: FACING_LEFT, vec!{Forward}, (-PLAYER_MAX_WALK_SPEED, MeterPerSec(0.0)),
             fwd_right: FACING_RIGHT, vec!{Forward}, (PLAYER_MAX_WALK_SPEED, MeterPerSec(0.0)),
+            run_fwd_up: FACING_UP, vec!{RunForward}, (MeterPerSec(0.0), PLAYER_MAX_WALK_SPEED * 2.0),
+            run_fwd_down: FACING_DOWN, vec!{RunForward}, (MeterPerSec(0.0), -PLAYER_MAX_WALK_SPEED * 2.0),
+            run_fwd_left: FACING_LEFT, vec!{RunForward}, (-PLAYER_MAX_WALK_SPEED * 2.0, MeterPerSec(0.0)),
+            run_fwd_right: FACING_RIGHT, vec!{RunForward}, (PLAYER_MAX_WALK_SPEED * 2.0, MeterPerSec(0.0)),
         }
     }
 }
