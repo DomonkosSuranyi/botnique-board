@@ -119,6 +119,10 @@ mod test {
             fwd_down: FACING_DOWN, vec!{Forward}, (MeterPerSec(0.0), -PLAYER_MAX_WALK_SPEED),
             fwd_left: FACING_LEFT, vec!{Forward}, (-PLAYER_MAX_WALK_SPEED, MeterPerSec(0.0)),
             fwd_right: FACING_RIGHT, vec!{Forward}, (PLAYER_MAX_WALK_SPEED, MeterPerSec(0.0)),
+            run_fwd_up: FACING_UP, vec!{RunForward}, (MeterPerSec(0.0), PLAYER_MAX_WALK_SPEED * 2.0),
+            run_fwd_down: FACING_DOWN, vec!{RunForward}, (MeterPerSec(0.0), -PLAYER_MAX_WALK_SPEED * 2.0),
+            run_fwd_left: FACING_LEFT, vec!{RunForward}, (-PLAYER_MAX_WALK_SPEED * 2.0, MeterPerSec(0.0)),
+            run_fwd_right: FACING_RIGHT, vec!{RunForward}, (PLAYER_MAX_WALK_SPEED * 2.0, MeterPerSec(0.0)),
         }
     }
 }
