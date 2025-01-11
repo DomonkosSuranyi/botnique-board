@@ -204,6 +204,14 @@ impl Div<f32> for MeterPerSec {
     }
 }
 
+impl Mul<f32> for MeterPerSec {
+    type Output = MeterPerSec;
+
+    fn mul(self, rhs: f32) -> Self::Output {
+        MeterPerSec(self.0 * rhs)
+    }
+}
+
 impl AddAssign<MeterPerSec> for MeterPerSec {
     fn add_assign(&mut self, rhs: MeterPerSec) {
         self.0.add_assign(rhs.0)

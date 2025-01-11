@@ -16,7 +16,11 @@ pub fn apply_input(mut query: Query<(&GlobalTransform, &mut Transform, &mut Velo
 fn move_directions_from_input(input: &Input) -> Vec<MoveDirection> {
     let mut directions = Vec::new();
     if input.flags.intersects(InputFlags::FORWARD) {
-        directions.push(MoveDirection::Forward);
+        if input.flags.intersects(InputFlags::RUN) {
+            directions.push(MoveDirection::RunForward);
+        } else {
+            directions.push(MoveDirection::Forward);
+        }
     }
     if input.flags.intersects(InputFlags::BACKWARD) {
         directions.push(MoveDirection::Backward);
@@ -66,6 +70,10 @@ fn as_vector2(move_dir: MoveDirection) -> MeterPerSecVec2 {
         MoveDirection::StrafeRight => MeterPerSecVec2 {
             x: -PLAYER_MAX_WALK_SPEED / 2.0,
             y: MeterPerSec(0.0),
+        },
+        MoveDirection::RunForward => MeterPerSecVec2 {
+            x: MeterPerSec(0.0),
+            y: PLAYER_MAX_WALK_SPEED * - 2.0,
         },
     }
 }
